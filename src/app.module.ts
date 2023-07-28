@@ -5,6 +5,7 @@ import { HashingModule } from './modules/hashing/hashing.module';
 import { LoggerModule } from './modules/logger/logger.module';
 import { PrismaService } from './prisma/prisma.service';
 import { TenantsModule } from './modules/tenants/tenants.module';
+import { MailModule } from './modules/mail/mail.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { TenantsModule } from './modules/tenants/tenants.module';
     LoggerModule,
     HashingModule,
     TenantsModule,
+    MailModule,
   ],
   controllers: [],
   providers: [PrismaService],

@@ -7,6 +7,7 @@ import { LoggerModule } from '../logger/logger.module';
 import { HashingService } from '../hashing/services/hashing.service';
 import { HashingModule } from '../hashing/hashing.module';
 import { LoggerService } from '../logger/services/logger.service';
+import { MailService } from '../mail/services/mail.service';
 
 @Module({
   imports: [LoggerModule, HashingModule],
@@ -16,6 +17,7 @@ import { LoggerService } from '../logger/services/logger.service';
     { provide: 'IBaseRepository', useClass: TenantsRepository },
     { provide: 'IHashingService', useClass: HashingService },
     { provide: 'ILoggerService', useClass: LoggerService },
+    { provide: 'IMailService', useClass: MailService },
   ],
   controllers: [TenantsController],
 })

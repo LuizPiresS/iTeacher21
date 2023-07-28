@@ -5,6 +5,7 @@ import { EmailAlreadyRegisteredError } from '../../../common/errors/types/email-
 import { IHashingService } from '../../hashing/services/interfaces/hashing-service.interface';
 import { ILoggerService } from '../../logger/services/interfaces/logger-service.interface';
 import { ConfigService } from '@nestjs/config';
+import { IMailService } from '../../mail/services/interfaces/mail.service.interface';
 
 @Injectable()
 export class TenantsService {
@@ -15,6 +16,8 @@ export class TenantsService {
     private readonly hashingService: IHashingService,
     @Inject('ILoggerService')
     private readonly logger: ILoggerService,
+    @Inject('IMailService')
+    private readonly mailService: IMailService,
     private readonly configService: ConfigService,
   ) {}
 
