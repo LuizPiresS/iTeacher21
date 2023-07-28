@@ -27,3 +27,11 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
       - POSTGRES_DB=${DB_NAME}
+
+  redis:
+    container_name: ${CONTAINER_NAME}-redis
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - .:/home/node/app
