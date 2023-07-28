@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   binaryTargets = ["native", "linux-musl"]
@@ -11,17 +8,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Tenant {
   id String @id @default(uuid())
+  name String
   email String @unique
   password String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  users User[]
+  cities TenantCities[]
+
+  @@map("tenants")
+}
+
+model TenantCities {
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  tenantId String
+
+  city Cities @relation(fields: [cityId], references: [id])
+  cityId String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@id([tenantId, cityId])
+
+  @@map("tenant_cities")
+}
+
+model Cities {
+  id String @id @default(uuid())
+  idCity Int @map("id_city")
+  ufCode String @map("uf_code")
+  name String
+  isCapital Boolean @map("is_capital")
+  lon Int
+  lat Int
+  noAccents String @map("no_accents")
+  slugName String @map("slug_name")
+  pop Int
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  tenants TenantCities[]
+
+  @@map("cities")
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  tenantId String @map("tenant_id")
 
   @@map("users")
 }
 
-model UserProfile {
-  id String @id @default(uuid())
-  name String
-  address Json
-  cellPhone String
-}
+

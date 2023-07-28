@@ -18,6 +18,10 @@ export abstract class BaseRepository<T> implements IBaseRepository<T> {
     return this.prisma[this.getModelName()].findUnique({ where: { id } });
   }
 
+  async findByEmail(email: string): Promise<T | null> {
+    return this.prisma[this.getModelName()].findUnique({ where: { email } });
+  }
+
   async findAll(): Promise<T[]> {
     return this.prisma[this.getModelName()].findMany();
   }

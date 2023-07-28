@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TenantsService } from './services/tenants.service';
 import { PrismaClient } from '@prisma/client';
 import { TenantsRepository } from './repositories/tenants.repository';

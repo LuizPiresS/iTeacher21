@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Body,
-  Param,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { TenantsService } from '../services/tenants.service';
 import { Tenant } from '.prisma/client';
 import { TenantInputDto } from '../dtos/tenant.input.dto';
