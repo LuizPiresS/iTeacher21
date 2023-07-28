@@ -1,0 +1,10 @@
+# Create new Tenant
+POST http://iteacher.local:3000/tenants
+Content-Type: application/json
+x-tenant-id: 'teste'
+
+{
+  "name": "Random Name",
+  "email": "raneeeeeeewwewerrwdom@random.com",
+  "password": "R@nd0mP@ssw0rd"
+}
