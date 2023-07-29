@@ -6,12 +6,13 @@ import { IHashingService } from '../../hashing/services/interfaces/hashing-servi
 import { ILoggerService } from '../../logger/services/interfaces/logger-service.interface';
 import { ConfigService } from '@nestjs/config';
 import { IMailService } from '../../mail/services/interfaces/mail.service.interface';
+import { ITenantsRepository } from '../repositories/interfaces/tenants.repository.interface';
 
 @Injectable()
 export class TenantsService {
   constructor(
-    @Inject('IBaseRepository')
-    private readonly tenantRepository: TenantsRepository,
+    @Inject('ITenantsRepository')
+    private readonly tenantRepository: ITenantsRepository,
     @Inject('IHashingService')
     private readonly hashingService: IHashingService,
     @Inject('ILoggerService')

@@ -14,7 +14,7 @@ import { MailService } from '../mail/services/mail.service';
   providers: [
     TenantsService,
     PrismaClient,
-    { provide: 'IBaseRepository', useClass: TenantsRepository },
+    { provide: 'ITenantsRepository', useClass: TenantsRepository },
     { provide: 'IHashingService', useClass: HashingService },
     { provide: 'ILoggerService', useClass: LoggerService },
     { provide: 'IMailService', useClass: MailService },
