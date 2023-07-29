@@ -68,9 +68,10 @@ describe('TenantsService', () => {
       tenantsRepositoryMock.create.mockResolvedValue({});
 
       const result = await service.createTenant(input);
-      expect(result).toEqual({});
+
       expect(tenantsRepositoryMock.findByEmail).toHaveBeenCalledTimes(1);
       expect(hashingServiceMock.hashingPassword).toHaveBeenCalledTimes(1);
+      expect(result).toEqual({});
     });
 
     it('not should be created a new tenant if tenant already registered', async () => {
