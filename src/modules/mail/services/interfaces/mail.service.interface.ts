@@ -1,5 +1,5 @@
-import { SendEmailUserConfirmationInputDto } from '../../dtos/send-email-user-confirmation.input.dto';
+import { SendEmailConfirmationInputDto } from '../../dtos/send-email-confirmation-input.dto';
 
 export interface IMailService {
-  sendUserConfirmation(data: SendEmailUserConfirmationInputDto): Promise<void>;
+  sendTenantConfirmation(data: SendEmailConfirmationInputDto): Promise<void>;
 }

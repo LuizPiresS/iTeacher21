@@ -1,8 +1,9 @@
 import { ConfigService } from '@nestjs/config';
-import { SendEmailUserConfirmationInputDto } from '../dtos/send-email-user-confirmation.input.dto';
+import { SendEmailConfirmationInputDto } from '../dtos/send-email-confirmation-input.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { IMailService } from './interfaces/mail.service.interface';
+
 @Injectable()
 export class MailService implements IMailService {
   constructor(
@@ -10,15 +11,15 @@ export class MailService implements IMailService {
     private readonly configService: ConfigService,
   ) {}
 
-  public async sendUserConfirmation(
-    input: SendEmailUserConfirmationInputDto,
+  public async sendTenantConfirmation(
+    input: SendEmailConfirmationInputDto,
   ): Promise<void> {
     const url = await this.generateValidationUrl(input.email, input.token);
 
     await this.mailerService.sendMail({
       to: input.email,
       // from: '"Support Team" <support@example.com>', // override default from
-      subject: this.configService.get<string>('MAIL_SUBJECT'),
+      subject: this.configService.get<string>('TENANT_MAIL_SUBJECT'),
       template: '../templates/confirmation', // `.hbs` extension is appended automatically
       context: {
         // ✏️ filling curly brackets with content

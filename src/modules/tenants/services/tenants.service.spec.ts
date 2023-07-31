@@ -7,6 +7,11 @@ import { HashingModule } from '../../hashing/hashing.module';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { EmailAlreadyRegisteredError } from '../../../common/errors/types/email-already-registered.error';
 import { IHashingService } from '../../hashing/services/interfaces/hashing-service.interface';
+import { TenantsProcessor } from '../queues/tenants.processor';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { ITenantsQueue } from '../queues/interfaces/tenants.queue.interface';
+import { MailService } from '../../mail/services/mail.service';
+import { MailerService } from '@nestjs-modules/mailer';
 
 export const tenantsRepositoryMock = {
   create: jest.fn(),
@@ -21,6 +26,16 @@ export const hashingServiceMock: IHashingService = {
   hashingPassword: jest.fn(),
 };
 
+export const tenantsQueueMock: ITenantsQueue = {
+  tenantSendValidationEmail: jest.fn(),
+};
+
+export class MailerServiceMock {
+  async sendMail(mailOptions: any): Promise<any> {
+    return Promise.resolve();
+  }
+}
+
 describe('TenantsService', () => {
   let service: TenantsService;
   beforeEach(async () => {
@@ -29,9 +44,21 @@ describe('TenantsService', () => {
         TenantsService,
         ConfigService,
         PrismaService,
+        TenantsProcessor,
+        EventEmitter2,
+
         {
           provide: 'IHashingService',
           useValue: hashingServiceMock,
+        },
+
+        {
+          provide: MailerService,
+          useClass: MailerServiceMock, // Aqui, usamos useClass para fornecer o mock em vez do serviço real.
+        },
+        {
+          provide: 'IMailService',
+          useClass: MailService,
         },
 
         {
@@ -45,6 +72,7 @@ describe('TenantsService', () => {
         },
 
         { provide: 'ITenantsRepository', useValue: tenantsRepositoryMock },
+        { provide: 'ITenantsQueue', useValue: tenantsQueueMock },
       ],
       imports: [LoggerModule, ConfigModule, HashingModule],
     }).compile();
@@ -71,6 +99,9 @@ describe('TenantsService', () => {
 
       expect(tenantsRepositoryMock.findByEmail).toHaveBeenCalledTimes(1);
       expect(hashingServiceMock.hashingPassword).toHaveBeenCalledTimes(1);
+      expect(tenantsQueueMock.tenantSendValidationEmail).toHaveBeenCalledTimes(
+        1,
+      );
       expect(result).toEqual({});
     });
 

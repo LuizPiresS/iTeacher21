@@ -1,6 +1,7 @@
 import {
   IsEmail,
   IsNotEmpty,
+  IsOptional,
   IsString,
   IsStrongPassword,
 } from 'class-validator';
@@ -27,4 +28,12 @@ export class TenantInputDto {
   @IsNotEmpty()
   @IsStrongPassword()
   password: string;
+
+  @IsString()
+  @IsOptional()
+  token?: string;
+
+  @IsOptional()
+  @IsString()
+  validated?: boolean;
 }

@@ -8,9 +8,18 @@ import { HashingService } from '../hashing/services/hashing.service';
 import { HashingModule } from '../hashing/hashing.module';
 import { LoggerService } from '../logger/services/logger.service';
 import { MailService } from '../mail/services/mail.service';
+import { BullModule } from '@nestjs/bull';
+import { TenantsProcessor } from './queues/tenants.processor';
+import { TenantsQueue } from './queues/tenants.queue';
 
 @Module({
-  imports: [LoggerModule, HashingModule],
+  imports: [
+    BullModule.registerQueue({
+      name: 'tenants',
+    }),
+    LoggerModule,
+    HashingModule,
+  ],
   providers: [
     TenantsService,
     PrismaClient,
@@ -18,6 +27,8 @@ import { MailService } from '../mail/services/mail.service';
     { provide: 'IHashingService', useClass: HashingService },
     { provide: 'ILoggerService', useClass: LoggerService },
     { provide: 'IMailService', useClass: MailService },
+    { provide: 'ITenantsProcessor', useClass: TenantsProcessor },
+    { provide: 'ITenantsQueue', useClass: TenantsQueue },
   ],
   controllers: [TenantsController],
 })

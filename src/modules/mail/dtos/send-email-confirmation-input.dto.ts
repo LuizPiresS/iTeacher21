@@ -1,6 +1,6 @@
 import { IsEmail, IsString } from 'class-validator';
 
-export class SendEmailUserConfirmationInputDto {
+export class SendEmailConfirmationInputDto {
   @IsString()
   readonly name: string;
 
