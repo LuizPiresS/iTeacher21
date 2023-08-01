@@ -2,7 +2,7 @@ import { ITenantsQueue } from './interfaces/tenants.queue.interface';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { TenantSendValidationEmailEvent } from '../events/tenant-send-validation-email.event';
+import { TenantSendValidationEmailEvent } from '../../../common/events/tenant-send-validation-email.event';
 
 export class TenantsQueue implements ITenantsQueue {
   constructor(

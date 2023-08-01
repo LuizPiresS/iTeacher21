@@ -1,5 +1,5 @@
 import { ConfigService } from '@nestjs/config';
-import { SendEmailConfirmationInputDto } from '../dtos/send-email-confirmation-input.dto';
+import { SendEmailConfirmationInputDto } from './dtos/send-email-confirmation-input.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { IMailService } from './interfaces/mail.service.interface';
@@ -20,7 +20,7 @@ export class MailService implements IMailService {
       to: input.email,
       // from: '"Support Team" <support@example.com>', // override default from
       subject: this.configService.get<string>('TENANT_MAIL_SUBJECT'),
-      template: '../templates/confirmation', // `.hbs` extension is appended automatically
+      template: '../templates/confirmation.tenant.mail', // `.hbs` extension is appended automatically
       context: {
         // ✏️ filling curly brackets with content
         name: input.name,

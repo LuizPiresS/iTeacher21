@@ -1,7 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { TenantsService } from '../services/tenants.service';
+import { TenantsService } from '../domain/tenants.service';
 import { Tenant } from '.prisma/client';
-import { TenantInputDto } from '../dtos/tenant.input.dto';
+import { TenantInputDto } from './dtos/tenant.input.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Tenants')

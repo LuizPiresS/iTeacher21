@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { LoggerService } from './services/logger.service';
+import { LoggerService } from './domain/logger.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

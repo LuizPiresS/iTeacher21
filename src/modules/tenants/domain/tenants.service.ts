@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { TenantInputDto } from '../dtos/tenant.input.dto';
+import { TenantInputDto } from '../http/dtos/tenant.input.dto';
 import { EmailAlreadyRegisteredError } from '../../../common/errors/types/email-already-registered.error';
-import { IHashingService } from '../../hashing/services/interfaces/hashing-service.interface';
-import { ILoggerService } from '../../logger/services/interfaces/logger-service.interface';
+import { IHashingService } from '../../../common/hashing/domain/interfaces/hashing-service.interface';
+import { ILoggerService } from '../../../common/loggers/domain/interfaces/logger-service.interface';
 import { ConfigService } from '@nestjs/config';
-import { ITenantsRepository } from '../repositories/interfaces/tenants.repository.interface';
+import { ITenantsRepository } from './interfaces/tenants.repository.interface';
 import { ITenantsQueue } from '../queues/interfaces/tenants.queue.interface';
 
 @Injectable()

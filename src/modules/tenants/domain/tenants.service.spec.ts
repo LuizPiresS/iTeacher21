@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TenantsService } from './tenants.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { LoggerService } from '../../logger/services/logger.service';
-import { LoggerModule } from '../../logger/logger.module';
-import { HashingModule } from '../../hashing/hashing.module';
-import { PrismaService } from '../../../prisma/prisma.service';
+import { LoggerService } from '../../../common/loggers/domain/logger.service';
+import { LoggerModule } from '../../../common/loggers/logger.module';
+import { HashingModule } from '../../../common/hashing/hashing.module';
+import { PrismaService } from '../../../common/prisma/prisma.service';
 import { EmailAlreadyRegisteredError } from '../../../common/errors/types/email-already-registered.error';
-import { IHashingService } from '../../hashing/services/interfaces/hashing-service.interface';
+import { IHashingService } from '../../../common/hashing/domain/interfaces/hashing-service.interface';
 import { TenantsProcessor } from '../queues/tenants.processor';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ITenantsQueue } from '../queues/interfaces/tenants.queue.interface';
-import { MailService } from '../../mail/services/mail.service';
+import { MailService } from '../../../common/mail/domain/mail.service';
 import { MailerService } from '@nestjs-modules/mailer';
 
 export const tenantsRepositoryMock = {

@@ -1,9 +1,9 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Inject } from '@nestjs/common';
-import { ILoggerService } from '../../logger/services/interfaces/logger-service.interface';
-import { IMailService } from '../../mail/services/interfaces/mail.service.interface';
+import { ILoggerService } from '../../../common/loggers/domain/interfaces/logger-service.interface';
+import { IMailService } from '../../../common/mail/domain/interfaces/mail.service.interface';
 import { Job } from 'bull';
-import { TenantSendValidationEmailEvent } from '../events/tenant-send-validation-email.event';
+import { TenantSendValidationEmailEvent } from '../../../common/events/tenant-send-validation-email.event';
 import { ITenantsProcessor } from './interfaces/tenants.processor.interface';
 
 @Processor('tenants')
