@@ -14,19 +14,23 @@ export class MailService implements IMailService {
   public async sendTenantConfirmation(
     input: SendEmailConfirmationInputDto,
   ): Promise<void> {
-    const url = await this.generateValidationUrl(input.email, input.token);
+    try {
+      const url = await this.generateValidationUrl(input.email, input.token);
 
-    await this.mailerService.sendMail({
-      to: input.email,
-      // from: '"Support Team" <support@example.com>', // override default from
-      subject: this.configService.get<string>('TENANT_MAIL_SUBJECT'),
-      template: '../templates/confirmation.tenant.mail', // `.hbs` extension is appended automatically
-      context: {
-        // ✏️ filling curly brackets with content
-        name: input.name,
-        url,
-      },
-    });
+      await this.mailerService.sendMail({
+        to: input.email,
+        // from: '"Support Team" <support@example.com>', // override default from
+        subject: this.configService.get<string>('TENANT_MAIL_SUBJECT'),
+        template: '../templates/confirmation.tenant.mail.hbs', // `.hbs` extension is appended automatically
+        context: {
+          // ✏️ filling curly brackets with content
+          name: input.name,
+          url,
+        },
+      });
+    } catch (e) {
+      console.error(e.message, 'dadaddassda');
+    }
   }
 
   private async generateValidationUrl(
