@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TenantsService } from './domain/tenants.service';
 import { PrismaClient } from '@prisma/client';
 import { TenantsRepository } from './domain/repositories/tenants.repository';
-import { TenantsController } from './http/tenants.controller';
+import { TenantsController } from './presentation/controllers/tenants.controller';
 import { LoggerModule } from '../../common/loggers/logger.module';
 import { HashingService } from '../../common/hashing/domain/hashing.service';
 import { HashingModule } from '../../common/hashing/hashing.module';

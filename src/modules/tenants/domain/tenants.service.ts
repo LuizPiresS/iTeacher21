@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { TenantInputDto } from '../http/dtos/tenant.input.dto';
+import { TenantInputDto } from '../presentation/dtos/tenant.input.dto';
 import { EmailAlreadyRegisteredError } from '../../../common/errors/types/email-already-registered.error';
 import { IHashingService } from '../../../common/hashing/domain/interfaces/hashing-service.interface';
 import { ILoggerService } from '../../../common/loggers/domain/interfaces/logger-service.interface';

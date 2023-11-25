@@ -29,7 +29,7 @@ export class MailService implements IMailService {
         },
       });
     } catch (e) {
-      console.error(e.message, 'dadaddassda');
+      console.error(e.message);
     }
   }
 
